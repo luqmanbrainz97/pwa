@@ -1,5 +1,7 @@
+import { ModalController } from '@ionic/angular';
 import { Component } from '@angular/core';
 import * as L from "leaflet";
+import { SearchModalComponent } from '../search-modal/search-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +12,9 @@ export class HomePage {
 
   map: L.Map;
 
-  constructor() {}
+  constructor(private modalCtrl: ModalController) {}
 
+  //for load map
   ngOnInit() {
     this.map = L.map('map', {
       center: [3.1209, 101.6538],
@@ -26,6 +29,15 @@ export class HomePage {
     setTimeout(() => {
       this.map.invalidateSize();
     },0);
+  }
+
+  //for modal page
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: SearchModalComponent
+    });
+
+    await modal.present();
   }
 
 }
