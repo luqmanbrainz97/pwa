@@ -1,16 +1,19 @@
 <ion-app>
   <ion-header translucent>
     <ion-toolbar >
-      <ion-title class="labelHeader">Which Campus</ion-title>
-      <ion-button class="ion-float-right">Close</ion-button>
+      <ion-title class="labelHeader">Which Campus
+        <ion-button class="ion-float-right">Close</ion-button>
+      </ion-title>
+ 
     </ion-toolbar>
     <ion-toolbar>
       <ion-searchbar></ion-searchbar>
     </ion-toolbar>
   </ion-header>
+
   <ion-content fullscreen>
-    <ion-list>
-      <ion-item>University of Malaya</ion-item>
+    <ion-list *ngFor="let university of universities">
+      <ion-item >{{ university.name }}</ion-item>
     </ion-list>
   </ion-content>
 </ion-app>

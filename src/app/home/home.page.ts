@@ -8,11 +8,13 @@ import { SearchModalComponent } from '../search-modal/search-modal.component';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
 
   map: L.Map;
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private modalCtrl: ModalController) {
+  }
 
   //for load map
   ngOnInit() {
@@ -39,5 +41,4 @@ export class HomePage {
 
     await modal.present();
   }
-
 }
