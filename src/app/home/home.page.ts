@@ -2,6 +2,7 @@ import { ModalController } from '@ionic/angular';
 import { Component } from '@angular/core';
 import * as L from "leaflet";
 import { SearchModalComponent } from '../search-modal/search-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +12,13 @@ import { SearchModalComponent } from '../search-modal/search-modal.component';
 
 export class HomePage {
 
+
+  
   map: L.Map;
 
-  constructor(private modalCtrl: ModalController) {
+  constructor(private modalCtrl: ModalController,
+    private route: Router
+    ) {
   }
 
   //for load map
@@ -40,5 +45,9 @@ export class HomePage {
     });
 
     await modal.present();
+  }
+
+  nextpage() {
+    this.route.navigate(['/select-campus']);
   }
 }

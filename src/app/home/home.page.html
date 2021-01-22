@@ -4,7 +4,7 @@
           <ion-button class="searchButton" (click)="openModal()">
             <div class="ion-text-left">Search</div>
           </ion-button>
-          <ion-button >
+          <ion-button (click)="nextpage()">
             <ion-icon name="arrow-redo-outline"></ion-icon>
           </ion-button>
         </ion-toolbar>
@@ -14,16 +14,16 @@
         </div>
       </ion-content>
       
-        <ion-tab-bar slot="bottom">
+        <!-- <ion-tab-bar slot="bottom">
           <ion-tab-button tab="explore">
             <ion-icon name="search-outline"></ion-icon>
             <ion-label>Explore</ion-label>
           </ion-tab-button>
       
-          <ion-tab-button tab="profile">
+          <ion-tab-button tab="profile" >
             <ion-icon name="people-outline"></ion-icon>
             <ion-label>My Profile</ion-label>
           </ion-tab-button>
-        </ion-tab-bar>
+        </ion-tab-bar> -->
       <!-- list all database elements -->
     </ion-app>
