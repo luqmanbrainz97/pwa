@@ -4,6 +4,7 @@ import * as L from "leaflet";
 import { SearchModalComponent } from '../search-modal/search-modal.component';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -12,14 +13,12 @@ import { Router } from '@angular/router';
 
 export class HomePage {
 
-
-  
   map: L.Map;
 
-  constructor(private modalCtrl: ModalController,
+  constructor(
+    private modalCtrl: ModalController,
     private route: Router
-    ) {
-  }
+    ){}
 
   //for load map
   ngOnInit() {
@@ -31,11 +30,24 @@ export class HomePage {
 
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href = "https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map)
+    }).addTo(this.map);
 
     setTimeout(() => {
       this.map.invalidateSize();
     },0);
+
+    //for map popup marker
+    // let popup = L.popup();
+    function onMapClick(e) {
+      // popup
+      //     .setLatLng(e.latlng)
+      //     .setContent("You clicked the map at " + e.latlng.toString())
+      //     .openOn(this.map);
+      L.marker(e.latlng).addTo(this.map);
+      console.log(e.latlng);
+    }
+    
+    this.map.on('click', onMapClick, this);
   }
 
   //for modal page
