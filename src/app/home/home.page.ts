@@ -61,7 +61,19 @@ export class HomePage implements OnInit{
 
   //function marker on POI
   onMapClick(e) {
-    let POImarker = L.marker(e.latlng);
-    POImarker.addTo(this.map);
+    let POIMarker = L.marker(e.latlng);
+    POIMarker.addTo(this.map);
+
+    //Call function to see lat and longitude
+    POIlatlng();
+
+    //function when the marker is placed down
+    function POIlatlng(){
+      let lat = e.latlng.lat;
+      let lon = e.latlng.lng;
+
+      console.log('lat: ', lat);
+      console.log('lon: ', lon);
+    }
   }
 }
