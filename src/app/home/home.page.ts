@@ -1,9 +1,14 @@
-import { ModalController } from '@ionic/angular';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 import * as L from "leaflet";
+//imports for showing leaflet marker
+import "leaflet/dist/images/marker-shadow.png";
+import "leaflet/dist/images/marker-icon.png";
+import "leaflet/dist/images/marker-icon-2x.png";
+
 import { SearchModalComponent } from '../search-modal/search-modal.component';
 import { Router } from '@angular/router';
-
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage {
-
+export class HomePage implements OnInit{
   map: L.Map;
 
   constructor(
@@ -20,8 +24,12 @@ export class HomePage {
     private route: Router
     ){}
 
-  //for load map
-  ngOnInit() {
+  ngOnInit(){
+    this.loadMap();
+  }
+
+  //function for load map
+  loadMap() {
     this.map = L.map('map', {
       center: [3.1209, 101.6538],
       zoom: 20,
@@ -32,25 +40,13 @@ export class HomePage {
       attribution: '&copy; <a href = "https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
+    this.map.on('click', this.onMapClick, this);
     setTimeout(() => {
       this.map.invalidateSize();
     },0);
-
-    //for map popup marker
-    // let popup = L.popup();
-    function onMapClick(e) {
-      // popup
-      //     .setLatLng(e.latlng)
-      //     .setContent("You clicked the map at " + e.latlng.toString())
-      //     .openOn(this.map);
-      L.marker(e.latlng).addTo(this.map);
-      console.log(e.latlng);
-    }
-    
-    this.map.on('click', onMapClick, this);
   }
 
-  //for modal page
+  //function for modal page
   async openModal() {
     const modal = await this.modalCtrl.create({
       component: SearchModalComponent
@@ -61,5 +57,23 @@ export class HomePage {
 
   nextpage() {
     this.route.navigate(['/select-campus']);
+  }
+
+  //function marker on POI
+  onMapClick(e) {
+    let POIMarker = L.marker(e.latlng);
+    POIMarker.addTo(this.map);
+
+    //Call function to see lat and longitude
+    POIlatlng();
+
+    //function when the marker is placed down
+    function POIlatlng(){
+      let lat = e.latlng.lat;
+      let lon = e.latlng.lng;
+
+      console.log('lat: ', lat);
+      console.log('lon: ', lon);
+    }
   }
 }
